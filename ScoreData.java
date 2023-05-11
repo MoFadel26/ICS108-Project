@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public  class ScoreData {
-    private int currentScore;
+    private static int currentScore;
     private int objectsNumber;
     private ArrayList<Integer> topScores =new ArrayList<>();
 
@@ -22,7 +22,7 @@ public  class ScoreData {
         this.objectsNumber = 1;
     }
 
-    public int getCurrentScore() {
+    public static int getCurrentScore() {
         return currentScore;
     }
 
@@ -33,8 +33,7 @@ public  class ScoreData {
         this.currentScore = this.currentScore + this.objectsNumber + 1;
     }
     public void incrementObjectsNumber(){
-        this.objectsNumber = this.objectsNumber + 2;
-
+        this.objectsNumber = this.objectsNumber + 1;
     }
 
     public int getTop1() {

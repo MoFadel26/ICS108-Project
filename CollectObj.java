@@ -1,7 +1,6 @@
 package com.example.original;
 
 import javafx.event.EventHandler;
-import javafx.scene.Group;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -36,7 +35,7 @@ public class CollectObj implements EventHandler<MouseEvent> {
             object=new GameObject();
             object.getObjectPane().setOnMouseClicked(
                     new CollectObj(backgroundPane, object, scoreData, currentScorePane, label));
-            if (GameObject.getNumberOfObjects() == 40){
+            if (GameObject.getNumberOfObjects() == 5){
             object.animation.setOnFinished(e-> {
                 scoreData.getTopScores().add(scoreData.getCurrentScore());
                 new PauseView(backgroundPane,scoreData);

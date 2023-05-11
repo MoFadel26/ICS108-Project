@@ -38,7 +38,7 @@ public class GameMain extends Application {
         backgroundPane.getChildren().add(startButton);
 
         Button endGameButton = new Button("End the game");
-        endGameButton.setLayoutY(450);
+        endGameButton.setLayoutY(475);
         endGameButton.setOnAction(e->stage.close());
 
 
@@ -46,11 +46,13 @@ public class GameMain extends Application {
             backgroundPane.getChildren().remove(startButton);
             backgroundPane.getChildren().add(endGameButton);
             backgroundPane.getChildren().add(currentScorePane);
-            GameObject object = new GameObject();
-            backgroundPane.getChildren().add(object.getObjectPane());
-            object.play();
-            object.getObjectPane().setOnMouseClicked(
-                    new CollectObj(backgroundPane, object, scoreData, currentScorePane, label));
+//            while (!(GameObject.getNumberOfObjects() == 40)){
+                GameObject object = new GameObject();
+                backgroundPane.getChildren().add(object.getObjectPane());
+                object.play();
+                object.getObjectPane().setOnMouseClicked(
+                        new CollectObj(backgroundPane, object, scoreData, currentScorePane, label));
+//            }
 
 //            object.animation.setOnFinished(e2-> {
 //                scoreData.getTopScores().add(scoreData.getCurrentScore());
