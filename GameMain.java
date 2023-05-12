@@ -98,8 +98,6 @@ public class GameMain extends Application {
 
 
                 });
-//                backgroundPane.getChildren().add(restartButton);
-
             }
         }));
         timeline.setCycleCount(Timeline.INDEFINITE);
@@ -108,16 +106,8 @@ public class GameMain extends Application {
         startButton.setOnAction(e->{
             backgroundPane.getChildren().remove(startButton);
             backgroundPane.getChildren().remove(OBJECTVALUES);
-//            backgroundPane.getChildren().add(endGameButton);
             backgroundPane.getChildren().add(currentScorePane);
             timeline.play();
-
-
-
-//            object.animation.setOnFinished(e2-> {
-//                scoreData.getTopScores().add(scoreData.getCurrentScore());
-//                new PauseView(backgroundPane,scoreData);
-//            });
 
         });
 
@@ -135,13 +125,7 @@ public class GameMain extends Application {
         object.getObjectPane().setOnMouseClicked(
                 new CollectObj(backgroundPane, object, scoreData, currentScorePane, label));
         return object;
-
-
     }
-
-
-
-
     public static void main(String[] args) {
         launch();
     }

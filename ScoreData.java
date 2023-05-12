@@ -7,7 +7,7 @@ import java.util.Collections;
 
 public  class ScoreData {
     private int currentScore;
-    private int objectsNumber;
+    private final int objectsNumber = 10;
     private ArrayList<Integer> topScores =new ArrayList<>();
 
     private int top1=0;
@@ -19,23 +19,14 @@ public  class ScoreData {
 
     public ScoreData() {
         this.currentScore = 0;
-        this.objectsNumber = 1;
     }
 
     public int getCurrentScore() {
         return currentScore;
     }
-
-    //    public int getObjectsNumber() {
-//        return objectsNumber;
-//    }
     public void incrementCurrentScore(int objectValue){
         this.currentScore = this.currentScore + objectValue;
     }
-    //    public void incrementObjectsNumber(){
-//        this.objectsNumber = this.objectsNumber + 2;
-//
-//    }
     public void resetCurrentScore(){
         this.currentScore = 0;
     }
@@ -43,8 +34,6 @@ public  class ScoreData {
         topScores.add(currentScore);
         orderScores();
     }
-
-
     public int getTop1() {
         return top1;
     }
@@ -78,7 +67,6 @@ public  class ScoreData {
             top5=topScores.get(topScores.size()-5);
         }
         catch (IndexOutOfBoundsException  e){
-            // the rest will be zero;
         }
 
     }

@@ -1,7 +1,6 @@
 package com.example.original;
 
 import javafx.event.EventHandler;
-import javafx.scene.Group;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -23,30 +22,12 @@ public class CollectObj implements EventHandler<MouseEvent> {
         this.label=label;
     }
 
-
-
     @Override
     public void handle(MouseEvent mouseEvent) {
         backgroundPane.getChildren().remove(object.getObjectPane());
         scoreData.incrementCurrentScore(object.objectValue());
         label.setText("Current score: "+ scoreData.getCurrentScore());
-//        scoreData.incrementObjectsNumber();
-
-//        if (scoreData.getObjectsNumber() < 40) {
-//            object=new GameObject();
-//            object.getObjectPane().setOnMouseClicked(
-//                    new CollectObj(backgroundPane, object, scoreData, currentScorePane, label));
-//            if (GameObject.getNumberOfObjects() == 40){
-//                object.animation.setOnFinished(e-> {
-//                    scoreData.getTopScores().add(scoreData.getCurrentScore());
-//                    new PauseView(backgroundPane,scoreData);
-//                });};
-//            backgroundPane.getChildren().add(object.getObjectPane());
-//            object.increaseSpeed();
-//            object.play();
-//        }
         backgroundPane.getChildren().add(currentScorePane);
-
     }
 }
 
