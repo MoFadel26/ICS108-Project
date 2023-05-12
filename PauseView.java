@@ -22,7 +22,7 @@ public class PauseView {
         lostScreenShow();
     }
     public void lostScreenShow(){
-        label = new Label("End Game");
+        label = new Label("Lost");
         lostScreen=new Pane(label);
         label.setFont(new Font("Arial", 50));
         label.setTextFill(Color.BLACK);

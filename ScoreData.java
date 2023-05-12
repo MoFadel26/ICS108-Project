@@ -6,15 +6,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public  class ScoreData {
-    private static int currentScore;
+    private int currentScore;
     private int objectsNumber;
     private ArrayList<Integer> topScores =new ArrayList<>();
 
-    private int top1;
-    private int top2;
-    private int top3;
-    private int top4;
-    private int top5;
+    private int top1=0;
+    private int top2=0;
+    private int top3=0;
+    private int top4=0;
+    private int top5=0;
 
 
     public ScoreData() {
@@ -22,19 +22,28 @@ public  class ScoreData {
         this.objectsNumber = 1;
     }
 
-    public static int getCurrentScore() {
+    public int getCurrentScore() {
         return currentScore;
     }
 
-    public int getObjectsNumber() {
-        return objectsNumber;
+    //    public int getObjectsNumber() {
+//        return objectsNumber;
+//    }
+    public void incrementCurrentScore(int objectValue){
+        this.currentScore = this.currentScore + objectValue;
     }
-    public void incrementCurrentScore(){
-        this.currentScore = this.currentScore + this.objectsNumber + 1;
+    //    public void incrementObjectsNumber(){
+//        this.objectsNumber = this.objectsNumber + 2;
+//
+//    }
+    public void resetCurrentScore(){
+        this.currentScore = 0;
     }
-    public void incrementObjectsNumber(){
-        this.objectsNumber = this.objectsNumber + 1;
+    public void addScore(){
+        topScores.add(currentScore);
+        orderScores();
     }
+
 
     public int getTop1() {
         return top1;
@@ -73,6 +82,8 @@ public  class ScoreData {
         }
 
     }
+    public void createtable(){
+
+
+    }
 }
-
-
