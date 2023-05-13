@@ -48,8 +48,18 @@ public class GameObject {
         return animation;
     }
     public void increaseSpeed(){
-        time -= 400;
-        animation.setDuration(Duration.millis(time));
+        if (time > 2000) {
+            time -= 400;
+            animation.setDuration(Duration.millis(time));
+        }
+        else {
+            time -= 50;
+            animation.setDuration(Duration.millis(time));
+        }
+    }
+
+    public static int getTime(){
+        return time;
     }
     public static void resetSpeed(){
         time=10000;

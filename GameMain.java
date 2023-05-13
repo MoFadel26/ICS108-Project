@@ -10,6 +10,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -17,21 +18,39 @@ import javafx.util.Duration;
 public class GameMain extends Application {
     private static final int WIDTH = 500;
     private static final int HEIGHT = 500;
-    Pane backgroundPane;
-    Label label, topText=new Label(), OBJECTVALUES;
-    VBox currentScorePane;
-    ScoreData scoreData = new ScoreData();
-    ImageLoader imageLoader=new ImageLoader();
+    static Pane backgroundPane;
+    Pane welcomePane;
+    static Label label;
+    static Label topText=new Label();
+    Label OBJECTVALUES;
+    Label welcomeText;
+    static VBox currentScorePane;
+    static ScoreData scoreData = new ScoreData();
+    static ImageLoader imageLoader=new ImageLoader();
+    ImageView welcomeBackground, gameBackground;
+    static Button restartButton, startButton, endGameButton, nextButton;
 //    Text topText;
 
-    int counter=0;
-    static Timeline timeline;
+    static int counter=0;
+    public static Timeline timeline;
 
     @Override
     public void start(Stage stage) {
+        welcomeBackground = new ImageView(ImageLoader.getImageView().getImage());
+        welcomeBackground.setFitHeight(HEIGHT);
+        welcomeBackground.setFitWidth(WIDTH);
+        welcomePane = new Pane(welcomeBackground);
+        welcomeText = new Label("      Welcome to the game!\n" +
+                "      Be fast to collect as many fruits as you can.\n" +
+                "      Click on the fruits to collect them.\n" +
+                "      Good luck!");
+        welcomeText.setFont(Font.font("Arial ", FontWeight.BOLD, 25));
+        welcomeText.setTranslateX(350 / 2 - 150);
+        welcomeText.setTranslateY(HEIGHT / 2 - 100);
+        welcomePane.getChildren().add(welcomeText);
 
 
-        ImageView gameBackground= new ImageView("https://images.unsplash.com/photo-1495195134817-aeb325a55b65?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y3V0dGluZyUyMGJvYXJkfGVufDB8fDB8fA%3D%3D&w=1000&q=80");
+        gameBackground= new ImageView(ImageLoader.getImageView().getImage());
         gameBackground.setFitHeight(HEIGHT);
         gameBackground.setFitWidth(WIDTH);
 
@@ -41,30 +60,41 @@ public class GameMain extends Application {
         currentScorePane = new VBox(label);
         currentScorePane.setSpacing(10);
 
-        OBJECTVALUES=new Label("Apple & Orange :         1 point\n"+
+        OBJECTVALUES = new Label("Each fruit has a different value:\n"+
+                "Apple & Orange :         1 point\n"+
                 "Tomato & Pineapple : 2 point\n"+
-                "Lemon & Potato :             3 point\n"+
-                "Watermelon :                 4 point\n"+
-                "Banana :                     5 point\n"+
-                "Cherry :                     7 point\n"+
-                "Strawberry :               9 point\n"
+                "Lemon & Potato :          3 point\n"+
+                "Watermelon :              4 point\n"+
+                "Banana :                   5 point\n"+
+                "Cherry :                      7 point\n"+
+                "Strawberry :                  9 point\n"
         );
         OBJECTVALUES.setFont(new Font("Arial ",20));
         OBJECTVALUES.setLayoutX(WIDTH / 2 -120);
-        OBJECTVALUES.setLayoutY(HEIGHT / 2  -150);
+        OBJECTVALUES.setLayoutY((HEIGHT - 75) / 2  -150);
         backgroundPane.getChildren().add(OBJECTVALUES);
 
-        Button startButton = new Button("Start the game");
+        nextButton = new Button("Next");
+        nextButton.setTranslateX(WIDTH / 2 - 50);
+        nextButton.setTranslateY(HEIGHT / 2 + 40);
+        welcomePane.getChildren().add(nextButton);
+        nextButton.setOnAction(e->{
+            welcomePane.getChildren().remove(nextButton);
+            stage.setScene(new Scene(backgroundPane, WIDTH, HEIGHT));
+            stage.show();
+        });
+
+        startButton = new Button("Start the game");
         startButton.setTranslateX(WIDTH / 2 - 50);
         startButton.setTranslateY(HEIGHT / 2 +40);
         backgroundPane.getChildren().add(startButton);
 
-        Button endGameButton = new Button("End the game");
+        endGameButton = new Button("End the game");
         endGameButton.setTranslateX(WIDTH / 2 - 50);
         endGameButton.setTranslateY(HEIGHT / 2 + 70);
         endGameButton.setOnAction(e->stage.close());
 
-        Button restartButton= new Button("Start new round");
+        restartButton = new Button("Start new round");
         restartButton.setTranslateX(WIDTH / 2 - 50);
         restartButton.setTranslateY(HEIGHT / 2 + 40);
         restartButton.setOnAction(e->{
@@ -80,11 +110,11 @@ public class GameMain extends Application {
 
         });
 
-        timeline = new Timeline(new KeyFrame(Duration.seconds(1.5), event -> {
+        timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
 
             GameObject object= newObject();
             counter++;
-            if(counter>10){
+            if(counter > 30){
                 timeline.pause();
                 object.getAnimation().setOnFinished(e-> {backgroundPane.getChildren().add(restartButton);
                     scoreData.addScore();
@@ -94,9 +124,6 @@ public class GameMain extends Application {
                     topText.setLayoutY(HEIGHT / 2  -100);
                     backgroundPane.getChildren().add(topText);
                     backgroundPane.getChildren().add(endGameButton);
-
-
-
                 });
             }
         }));
@@ -108,17 +135,16 @@ public class GameMain extends Application {
             backgroundPane.getChildren().remove(OBJECTVALUES);
             backgroundPane.getChildren().add(currentScorePane);
             timeline.play();
-
         });
 
-        stage.setTitle("Hello!");
-        stage.setScene(new Scene(backgroundPane, WIDTH, HEIGHT));
+        stage.setTitle("Fruit Collector");
+        stage.setScene(new Scene(welcomePane, WIDTH, HEIGHT));
         stage.setMaxHeight(1000);
         stage.setMaxWidth(1000);
         stage.show();
 
     }
-    public GameObject newObject(){
+    public static GameObject newObject(){
         GameObject object = new GameObject(imageLoader.calcRandomIndex(),imageLoader.getImage());
         backgroundPane.getChildren().add(object.getObjectPane());
         object.play();
@@ -126,6 +152,7 @@ public class GameMain extends Application {
                 new CollectObj(backgroundPane, object, scoreData, currentScorePane, label));
         return object;
     }
+
     public static void main(String[] args) {
         launch();
     }

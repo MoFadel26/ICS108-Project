@@ -1,8 +1,10 @@
 package com.example.original;
 
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class ImageLoader {
+    public static ImageView imageView = new ImageView("https://images.unsplash.com/photo-1495195134817-aeb325a55b65?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y3V0dGluZyUyMGJvYXJkfGVufDB8fDB8fA%3D%3D&w=1000&q=80");
 
     int randomIndex;
     private static final String[] IMAGE_URLS = {
@@ -23,6 +25,10 @@ public class ImageLoader {
         for (int i = 0; i < IMAGE_URLS.length; i++) {
             images[i] = new Image(IMAGE_URLS[i]);
         }
+    }
+
+    public static ImageView getImageView() {
+        return imageView;
     }
 
     public  Image getImage() {
