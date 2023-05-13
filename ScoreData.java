@@ -15,8 +15,6 @@ public  class ScoreData {
     private int top3=0;
     private int top4=0;
     private int top5=0;
-
-
     public ScoreData() {
         this.currentScore = 0;
     }
@@ -54,9 +52,6 @@ public  class ScoreData {
         return top5;
     }
 
-    public ArrayList<Integer> getTopScores() {
-        return topScores;
-    }
     public void orderScores(){
         try{
             Collections.sort(topScores);
@@ -68,10 +63,5 @@ public  class ScoreData {
         }
         catch (IndexOutOfBoundsException  e){
         }
-
-    }
-    public void createtable(){
-
-
     }
 }

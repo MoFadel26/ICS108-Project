@@ -29,8 +29,6 @@ public class GameMain extends Application {
     static ImageLoader imageLoader=new ImageLoader();
     ImageView welcomeBackground, gameBackground;
     static Button restartButton, startButton, endGameButton, nextButton;
-//    Text topText;
-
     static int counter=0;
     public static Timeline timeline;
 

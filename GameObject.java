@@ -11,7 +11,6 @@ import javafx.util.Duration;
 
 public class GameObject {
     private static final int numberOfObjects = 0;
-    String imageURL;
     Pane ObjectPane= new Pane();
     Label value;
     double Xcord, Ycord;
@@ -47,9 +46,6 @@ public class GameObject {
         animation.setByY(1400);
         increaseSpeed();
     }
-    public static int getNumberOfObjects(){
-        return numberOfObjects;
-    }
     public Pane getObjectPane() {
         return ObjectPane;
     }
@@ -68,10 +64,6 @@ public class GameObject {
             time -= 50;
             animation.setDuration(Duration.millis(time));
         }
-    }
-
-    public static int getTime(){
-        return time;
     }
     public static void resetSpeed(){
         time=10000;
