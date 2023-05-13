@@ -2,6 +2,7 @@ package com.example.original;
 
 
 import javafx.animation.TranslateTransition;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -12,7 +13,7 @@ public class GameObject {
     private static final int numberOfObjects = 0;
     String imageURL;
     Pane ObjectPane= new Pane();
-
+    Label value;
     double Xcord, Ycord;
     TranslateTransition animation= new TranslateTransition();
     static int time=10000;
@@ -20,14 +21,25 @@ public class GameObject {
 
     GameObject(int randomIndex, Image image) {
         this.randomIndex = randomIndex;
+
         ImageView objectImage = new ImageView(image);
         objectImage.setFitHeight(125);
         objectImage.setFitWidth(125);
+
         this.Xcord = 10 + Math.random() * 300;
         this.Ycord = -120;
         objectImage.setX(Xcord);
         objectImage.setY(Ycord);
+
         this.ObjectPane.getChildren().add(objectImage);
+
+        value = new Label(Integer.toString(objectValue()));
+        value.setStyle("-fx-font-size: 30px; -fx-font-weight: bold; -fx-text-fill: black");
+        this.ObjectPane.getChildren().add(value);
+        value.setLayoutX(this.Xcord);
+        value.setLayoutY(this.Ycord);
+
+
         this.ObjectPane.setMaxSize(125, 125);
         this.ObjectPane.setMinSize(125, 125);
         animation.setNode(this.getObjectPane());

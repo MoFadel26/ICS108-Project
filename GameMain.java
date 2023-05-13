@@ -60,14 +60,14 @@ public class GameMain extends Application {
         currentScorePane = new VBox(label);
         currentScorePane.setSpacing(10);
 
-        OBJECTVALUES = new Label("Each fruit has a different value:\n"+
-                "Apple & Orange :         1 point\n"+
-                "Tomato & Pineapple : 2 point\n"+
-                "Lemon & Potato :          3 point\n"+
-                "Watermelon :              4 point\n"+
-                "Banana :                   5 point\n"+
-                "Cherry :                      7 point\n"+
-                "Strawberry :                  9 point\n"
+        OBJECTVALUES = new Label("Each fruit has a different value:\n" +
+                "Apple & Orange :         1 point\n" +
+                "Tomato & Pineapple : 2 point\n" +
+                "Lemon & Potato :          3 point\n" +
+                "Watermelon :                  4 point\n" +
+                "Banana :                           5 point\n" +
+                "Cherry :                             7 point\n" +
+                "Strawberry :                    9 point\n"
         );
         OBJECTVALUES.setFont(new Font("Arial ",20));
         OBJECTVALUES.setLayoutX(WIDTH / 2 -120);
